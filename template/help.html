@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Protein folding user web-interface">
+
+      <title>Help and FAQs</title>
+
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/list-groups/">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/grid/">
+      <link rel="stylesheet" href="{{url_for('static',filename= './assets/dist/css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename= './css/help.css')}}">
+  </head>
+  <body>
+          <canvas id="canvas"></canvas>
+          <!--
+          Navigation Bar
+          ==========================-->
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="https://www.deshbandhucollege.ac.in" target="_blank">Deshbandhu College</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasNavbar2Label" style="color: white;">Deshbandhu College</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/peptool">PepAnalyzer</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/blast_tool">Blast Tool</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Details
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/#team">Team</a></li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#contacts">Contacts</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/documentation">Documentation and FAQ</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          <!--
+          Content
+          ==========================-->
+          <main class="main-content-container">
+            <!--Help/Documentation-->
+            <div id="document" class="wrapper mb-5" style="border-radius:1px; border-top-right-radius: 12px; border-top-left-radius: 12px;">
+              <h2>Documentation & FAQ</h2>
+              <br>
+                <div style="color: #6b7684;">
+                <h4>Steps to Use PepAnalyzer Tool </h4>
+                <br>
+                <h6>
+                <center>
+                <ul>Step 1:Type and Paste the Sequence in the Input Box</ul>
+                <image src="{{url_for('static',filename= '../static/assets/images/step1.png')}}" width="80%" height="80%">
+                <p><ul> Step 2: Select the Properties form the List</ul></p>
+                <image src="{{url_for('static',filename= '../static/assets/images/step2.png')}}" width="80%" height="80%">
+                <p><ul>Step 3: Click on Calculate Button</ul></p>
+                <image src="{{url_for('static',filename= '../static/assets/images/step3.png')}}" width="80%" height="80%">
+                <p><ul>Step 4: The Output will appear on the next page </ul><p>
+                <image src="{{url_for('static',filename= '../static/assets/images/step4.png')}}" width="80%" height="80%">
+                </center>
+                </h6>
+                <h4>Sequence</h4>
+                <p>Input a peptide sequence, either in upper or lowercase letters. The app will show an alert if ambiguity is detected in the sequence. That is the presence of invalid letters such as "B", "J", "O", "U", "X", "Z" in the sequence entered.</p>
+                <br>
+                <h4>Set parameters</h4>
+                <p>There are 16 types of functionalities available to be calculated for the given peptide sequence and an extra added Blast tool access</p>
+                <p>
+                  <ul>
+                    <li>Physical/Chemical Properties
+                      <ul>
+                        <li>Peptide Size</li>
+                        <li>Molecular Weight</li>
+                        <li>Distribution of Amino Acid</li>
+                        <li>Amino Acid Classifier</li>
+                      </ul>
+                    </li>
+                    <li>Predictive Tools
+                      <ul>
+                        <li>Peptide Charge Calculator</li>
+                        <li>Aromicity Calculator</li>
+                        <li>Half Life Predictor</li>
+                        <!--li>Predict Secondary Structure</li-->
+                        <li>Molar Extinction Coefficient</li>
+                        <li>Disulfide Bridges Calculation</li>
+                        <li>Binding Potential Calculator</li>
+                      </ul>
+                    </li>
+                    <li>Graphical Representations
+                      <ul>
+                        <li>Hydropathy Plot for Peptide</li>
+                        <li>Helical Wheel Projection for Peptide</li>
+                        <li>Distribution of Amino Acid</li>
+                        <li>Amino Acid Classifier</li>
+                      </ul>
+                    </li>
+                    <li>Conversion Utility
+                      <ul>
+                        <li>One-to-Three Letter Code Conversion</li>
+                      </ul>
+                    </li>
+                    <li>Blast tool</li>
+                  </ul>
+                </p>
+                <br>
+                <br>
+                <h4 id="contacts">Submit</h4>
+                Clicking on Submit will take us to a new page where we can see all the results that have been calculated. If the blast tool was accessed, this may take some time to display results depending on the length of the input sequence.
+                <br>
+                <br>
+                <h4>Query</h4>
+                Mail your query to <a href="mailto:mrlabdbc@db.du.ac.in">mrlabdbc@db.du.ac.in</a>.
+
+              </div>
+            </div>
+
+            <!--FAQ-->
+            <div id="faq" class="wrapper">
+                <h2>Frequently Asked Questions</h2>
+                <div class="custom-accordion">
+                  <div class="custom-accordion-item">
+                    <button id="custom-accordion-button-1" class="custom-accordion-button" aria-expanded="false"><span class="custom-accordion-title">How do I cite PepAnalyzer?</span><span class="icon" aria-hidden="true"></span></button>
+                    <div class="custom-accordion-content">
+                      <p><a href="https://rdcu.be/dlqkW">Link to the research paper</a></p>
+                    </div>
+                  </div>
+                  <div class="custom-accordion-item">
+                    <button id="custom-accordion-button-2" class="custom-accordion-button" aria-expanded="false"><span class="custom-accordion-title">How many sequences I can input at a time?</span><span class="icon" aria-hidden="true"></span></button>
+                    <div class="custom-accordion-content">
+                      <p>One sequence at a time.</p>
+                    </div>
+                  </div>
+                  <div class="custom-accordion-item">
+                    <button id="custom-accordion-button-3" class="custom-accordion-button" aria-expanded="false"><span class="custom-accordion-title">How can I download the output generated?</span><span class="icon" aria-hidden="true"></span></button>
+                    <div class="custom-accordion-content">
+                      <p>The graphical plots can be downloaded in the .png format and the blast tool output can be downloaded as a .txt formated file.</p>
+                    </div>
+                  </div>
+                  <div class="custom-accordion-item">
+                    <button id="custom-accordion-button-4" class="custom-accordion-button" aria-expanded="false"><span class="custom-accordion-title">Should I use upper case or lower case while inputting the sequence?</span><span class="icon" aria-hidden="true"></span></button>
+                    <div class="custom-accordion-content">
+                      <p>Both will work. The tool automatically converts the sequence to uppercase.</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </main>
+
+          <!--
+          Footer
+          ==========================-->
+          <div class="container">
+            <footer class="py-3 my-4">
+              <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="/peptool" class="nav-link px-2 text-muted">PepAnalyzer</a></li>
+                <li class="nav-item"><a href="/blast_tool" class="nav-link px-2 text-muted">Blast Tool</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Research paper</a></li>
+                <li class="nav-item"><a href="#faq" class="nav-link px-2 text-muted">FAQs</a></li>
+                <li class="nav-item"><a href="#document" class="nav-link px-2 text-muted">Documentation</a></li>
+              </ul>
+              <p class="text-center text-muted">&copy; PepAnalyzer tool version-1</p>
+            </footer>
+          </div>
+
+  </body>
+  <script src="{{url_for('static',filename= './assets/dist/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename= './js/particle.js')}}"></script>
+  <script>
+    // Get all the accordion buttons
+    const accordionButtons = document.querySelectorAll('.custom-accordion-button');
+
+    // Add a click event listener to each button
+    accordionButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Toggle the aria-expanded attribute of the button
+        const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+        button.setAttribute('aria-expanded', !expanded);
+
+        // Toggle the visibility of the content
+        const content = button.nextElementSibling;
+        content.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  </script>
+</html>

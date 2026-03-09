@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulk Sequence List - PepAnalyzer</title>
+    <link rel="stylesheet" href="{{url_for('static',filename= './assets/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename= './css/pepResult.css')}}">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <main class="main-content-container">
+        <div class="wrapper">
+            <h2 style="color:#ce7e00">Extracted Sequences</h2>
+            <p class="text-muted">Sequences have been cleaned of invalid characters automatically.</p>
+            
+            <div class="table-content mt-4">
+                <table cellspacing="0">
+                    <tr style="background-color: rgba(118, 118, 118, 0.841);">
+                        <th>#</th>
+                        <th>Cleaned Sequence</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for seq in sequences %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td style="font-family: monospace;">{{ seq }}</td>
+                        <td>
+                            <form action="/calculate_result" method="post" style="display:inline;">
+                                <input type="hidden" name="seq" value="{{ seq }}">
+                                {% for i in [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17] %}
+                                    <input type="hidden" name="cal" value="f{{ i }}">
+                                {% endfor %}
+                                <button type="submit" class="btn btn-outline-primary btn-sm">Analyze</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <div class="btn-wrapper mt-5">
+                <a href="/peptool" class="btn btn-outline-primary btn-lg">Back to Tool</a>
+            </div>
+        </div>
+    </main>
+    <script src="{{url_for('static',filename= './js/particle.js')}}"></script>
+</body>
+</html>

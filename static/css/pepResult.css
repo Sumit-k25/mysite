@@ -1,0 +1,247 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  z-index: -3;
+}
+
+#canvas {
+  display: block;
+  position: fixed;
+  z-index: -1;
+  top:0%;
+}
+
+.navbar {
+  position: fixed;
+  top:0px;
+  width: 100%;
+  z-index: 5;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+
+
+/*main-container*/
+.main-content-container {
+  margin-top: 130px;
+  width: 100%;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  padding: 40px;
+  padding-bottom: 90px;
+  max-width: 960px;
+  width: 95%;
+  margin: 20px auto;
+  backdrop-filter: blur(7px) saturate(118%);
+  -webkit-backdrop-filter: blur(10px) saturate(118%);
+  border-radius: 12px;
+  border: 1px solid rgba(69, 69, 69, 0.19);
+  box-shadow: 0px 0px 40px rgba(69, 69, 69, 0.19);
+}
+
+.table-content {
+    margin-bottom: 50px;
+    background-color: rgba(140, 140, 140, 0);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.table-header {
+    background-color: rgba(24, 62, 62, 0);
+    color:rgb(75, 75, 75);
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+          
+.table-users {
+    border: 1px solid #327a81;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    width: 800px;
+}
+          
+table {
+    width: 100%;
+    background-color: rgba(140, 140, 140, 0.044);
+}
+table td, table th {
+  color: rgb(129, 129, 129);;
+  padding: 10px;
+}
+table td {
+    text-align: center;
+    vertical-align: middle;
+}
+  table td:last-child {
+    font-size: 0.95em;
+    line-height: 1.4;
+    text-align: left;
+}
+table th {
+    background-color: rgba(118, 118, 118, 0.841);
+    font-weight: 900;
+    color: rgb(29, 22, 22);
+}
+table tr:nth-child(2n) {
+    background-color: #20202006;
+    color: rgb(129, 129, 129);
+}
+table tr:nth-child(2n+1) {
+    background-color: rgba(22, 22, 22, 0.062);
+    color: rgb(129, 129, 129);;
+}
+table td label {
+  color: rgb(76, 76, 76);;
+  font-weight: 600;
+}
+          
+@media screen and (max-width: 700px) {
+table, tr, td {
+  display: block;
+}
+  
+td:first-child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+}
+td:not(:first-child) {
+  clear: both;
+  margin-left: 100px;
+  padding: 4px 20px 4px 90px;
+  position: relative;
+  text-align: left;
+}
+td:not(:first-child):before {
+  color: #91ced4;
+  content: "";
+  display: block;
+  left: 0;
+  position: absolute;
+}
+          
+tr {
+  padding: 10px 0;
+  position: relative;
+}
+tr:first-child {
+  display: none;
+}
+}
+@media screen and (max-width: 500px) {
+.table-header {
+  background-color: transparent;
+  color: white;
+  font-size: 2em;
+  font-weight: 700;
+  padding: 0;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+          
+td:first-child {
+  background-color: #c8e7ea;
+  border-bottom: 1px solid #91ced4;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  top: 0;
+  transform: translateY(0);
+  width: 100%;
+}
+td:not(:first-child) {
+  margin: 0;
+  padding: 5px 1em;
+  width: 100%;
+}
+td:not(:first-child):before {
+  font-size: 0.8em;
+  padding-top: 0.3em;
+  position: relative;
+}
+td:last-child {
+  padding-bottom: 1rem !important;
+}
+          
+tr {
+  background-color: white !important;
+  border: 1px solid #6cbec6;
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
+  padding: 0;
+}
+          
+.table-users {
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+}
+}
+
+
+/*button-container*/
+.btn-wrapper {
+  margin-top: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.btn {
+  border-radius: 18px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+
+/*footer-divider*/
+.container {
+    backdrop-filter: blur(7px) saturate(118%);
+    -webkit-backdrop-filter: blur(10px) saturate(118%);
+    border: 1px solid rgba(69, 69, 69, 0.19);
+    margin-top: 100px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+#btn-dwnld {
+    width: 80px;
+    height: 30px;
+    margin-left: auto;
+    margin-right: 30px;
+    margin-top: 10px;
+    border-radius: 18px;
+    justify-content: center;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+#viewfile {
+  width: fit-content;
+  height: 30px;
+  margin-left: auto;
+  margin-right: 30px;
+  margin-top: 10px;
+  border-radius: 18px;
+  justify-content: center;
+  padding-left:8px;
+  padding-right:8px;
+}
+
+
+
+    

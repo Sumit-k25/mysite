@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>PepAnalyzer - Peptide Analysis Tool</title>
+      <link rel="stylesheet" href="{{url_for('static',filename= './assets/dist/css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{url_for('static',filename= './css/pepTool.css')}}">
+  </head>
+  <body>
+          <canvas id="canvas"></canvas>
+
+          <div class="loading-screen">
+            <div class="loader"></div>
+            <label>Processing...</label>
+          </div>
+
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="https://www.deshbandhucollege.ac.in" target="_blank">Deshbandhu College</a>
+              <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="/peptool">PepAnalyzer</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/blast_tool">Blast Tool</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          <main class="main-content-container">
+            <div class="wrapper">
+                <header><h1 style="color:#ce7e00">PepAnalyzer</h1></header>
+                
+                <section>
+                  <form method="post" action="/calculate_result" id="dataForm" enctype="multipart/form-data">
+                    
+                    <div class="radio-container text-center mb-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inputMethod" id="manualRadio" value="manual" checked onclick="toggleInput()">
+                        <label class="form-check-label" for="manualRadio">Enter Manually</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inputMethod" id="bulkRadio" value="bulk" onclick="toggleInput()">
+                        <label class="form-check-label" for="bulkRadio">Upload Text File</label>
+                      </div>
+                    </div>
+
+                    <div id="manualEntrySection" class="pb-4">
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-text">Protein Sequence</span>
+                        <input name="seq" type="text" class="form-control" id="seq" placeholder="Enter sequence">
+                      </div>
+                      <button type="button" class="btn btn-outline-primary btn-sm mt-3" id="sampleSequenceButton">Use Sample Sequence</button>
+                    </div>
+
+                    <div id="bulkUploadSection" class="pb-5" style="display: none;">
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-text">Upload .txt File</span>
+                        <input type="file" name="seq_file" id="seq_file" class="form-control" accept=".txt">
+                      </div>
+                      <small class="text-center d-block mt-2" style="color: #ce7e00;">* One sequence per line. Ambiguous codes removed automatically.</small>
+                    </div>
+
+                    <div class="columns">
+                        <div class="column">
+                          <div class="column-title" style="color:#ce7e00">Physical/Chemical</div>
+                          <div class="list-group w-auto">
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f1" type="checkbox" checked><span><strong>Peptide Size</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f2" type="checkbox" checked><span><strong>Molecular Weight</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f4" type="checkbox" checked><span><strong>AA Distribution</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f5" type="checkbox" checked><span><strong>AA Classifier</strong></span></label>
+                          </div>
+                        </div>
+
+                        <div class="column">
+                          <div class="column-title" style="color:#ce7e00">Predictive Tools</div>
+                          <div class="list-group w-auto">
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f6" type="checkbox" checked><span><strong>Peptide Charge</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f7" type="checkbox" checked><span><strong>Aromaticity</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f8" type="checkbox" checked><span><strong>Half Life/Gravy</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f10" type="checkbox" checked><span><strong>Extinction Coeff.</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f11" type="checkbox" checked><span><strong>Disulfide Bridges</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f12" type="checkbox" checked><span><strong>Binding Potential</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f17" type="checkbox" checked><span><strong>Isoelectric Point</strong></span></label>
+                          </div>
+                        </div>
+
+                        <div class="column">
+                          <div class="column-title" style="color:#ce7e00">Graphical</div>
+                          <div class="list-group w-auto">
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f13" type="checkbox" checked><span><strong>Hydropathy Plot</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f14" type="checkbox" checked><span><strong>Helical Wheel</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f15" type="checkbox" checked><span><strong>AA Distribution Plot</strong></span></label>
+                            <label class="list-group-item d-flex gap-3"><input class="form-check-input" name="cal" value="f16" type="checkbox" checked><span><strong>AA Classifier Plot</strong></span></label>
+                          </div>
+                        </div>
+                    </div>
+
+                    <label class="list-group-item d-flex gap-3 mt-5" style="background: transparent; border: none;">
+                        <input id="select" class="form-check-input" type="checkbox" checked onclick='selects()'>
+                        <strong id="select-all-functions">Deselect all options</strong>
+                    </label>
+
+                    <div class="btn-wrapper mt-5">
+                      <input type="reset" class="btn btn-outline-primary btn-lg">
+                      <input type="button" id="submitBtn" class="btn btn-outline-primary btn-lg" value="Analyze Manual" onclick="handleSubmission();">
+                    </div>
+                  </form>
+                </section>
+            </div>
+          </main>
+
+          <script src="{{url_for('static',filename= './assets/dist/js/bootstrap.bundle.min.js')}}"></script>
+          <script src="{{url_for('static',filename= './js/pepTool.js')}}"></script>
+          <script src="{{url_for('static',filename= './js/particle.js')}}"></script>
+          
+          <script>
+            function toggleInput() {
+              const isManual = document.getElementById('manualRadio').checked;
+              document.getElementById('manualEntrySection').style.display = isManual ? 'block' : 'none';
+              document.getElementById('bulkUploadSection').style.display = isManual ? 'none' : 'block';
+              document.getElementById('submitBtn').value = isManual ? "Analyze Manual" : "Process Bulk File";
+            }
+
+            function handleSubmission() {
+              const isManual = document.getElementById('manualRadio').checked;
+              if (isManual) {
+                checkAmbiguity(); // Function in pepTool.js
+              } else {
+                handleBulkUpload(); // Function defined in scripts below
+              }
+            }
+
+            function handleBulkUpload() {
+                const fileInput = document.getElementById('seq_file');
+                const form = document.getElementById('dataForm');
+                if (fileInput.files.length > 0) {
+                    form.action = "/bulk_sequence_list"; // New route for bulk display
+                    form.submit();
+                    document.querySelector('.loading-screen').style.display = 'flex';
+                } else {
+                    alert("Please select a .txt file!");
+                }
+            }
+          </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    z-index: -3;
+}
+
+#canvas {
+    display: block;
+    position: fixed;
+    z-index: -1;
+    top:0%;
+}
+
+.navbar {
+    position: fixed;
+    top:0px;
+    width: 100%;
+    z-index: 5;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h4 {
+    color: #696969;
+}
+
+/*main-container*/
+.main-content-container {
+    margin-top: 130px;
+    width: 100%;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
+* {
+  box-sizing: border-box;
+}
+*::before, *::after {
+  box-sizing: border-box;
+}
+
+.wrapper {
+    backdrop-filter: blur(7px) saturate(118%);
+    -webkit-backdrop-filter: blur(10px) saturate(118%);
+    border: 1px solid rgba(69, 69, 69, 0.19);
+    margin-top: 100px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    margin: 0 auto;
+    padding: 4rem;
+    width: 48rem;
+}
+.container {
+    backdrop-filter: blur(7px) saturate(118%);
+    -webkit-backdrop-filter: blur(10px) saturate(118%);
+    border: 1px solid rgba(69, 69, 69, 0.19);
+    margin-top: 100px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.custom-accordion .custom-accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+.custom-accordion .custom-accordion-item button[aria-expanded=true] {
+  border-bottom: 1px solid #03b5d2;
+}
+.custom-accordion button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #7288a2;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+}
+.custom-accordion button:hover, .custom-accordion button:focus {
+  cursor: pointer;
+  color: #03b5d2;
+}
+.custom-accordion button:hover::after, .custom-accordion button:focus::after {
+  cursor: pointer;
+  color: #03b5d2;
+  border: 1px solid #03b5d2;
+}
+.custom-accordion button .custom-accordion-title {
+  padding: 1em 1.5em 1em 0;
+}
+.custom-accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+.custom-accordion button .icon::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+}
+.custom-accordion button .icon::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+}
+.custom-accordion button[aria-expanded=true] {
+  color: #03b5d2;
+}
+.custom-accordion button[aria-expanded=true] .icon::after {
+  width: 0;
+}
+.custom-accordion button[aria-expanded=true] + .custom-accordion-content {
+  opacity: 1;
+  max-height: 9em;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+}
+.custom-accordion .custom-accordion-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+.custom-accordion .custom-accordion-content p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 2em 0;
+}

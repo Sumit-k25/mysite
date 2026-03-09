@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Protein folding user web-interface">
+
+        <title>PepAnalyzer</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/list-groups/">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/grid/">
+
+        <link rel="stylesheet" href="{{url_for('static',filename= './assets/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename= './css/home.css')}}">
+
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <!--
+        Navigation Bar
+        ==========================-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.deshbandhucollege.ac.in" target="_blank">Deshbandhu College</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbar2Label" style="color:white;">Deshbandhu College</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/peptool">PepAnalyzer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/blast_tool">Blast Tool</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Details
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/#team">Team</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="/documentation#contacts">Contacts</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/documentation">Documentation and FAQ</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!--
+        Content
+        ==========================-->
+        <main>
+          <!--Hero-->
+          <div class="hero-container">
+            <div class="px-4 py-5 my-5 text-center">
+              <!--img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"-->
+              <h1 class="display-7 fw-bold" style="color:#ce7e00">PepAnalyzer</h1>
+              <div class="col-lg-6 mx-auto">
+                <br>
+                <p class="fw-semibold" style="font-size: large;">Welcome to our academic research-based web tool!<br><br>
+                This tool provides a suite of powerful and user-friendly functions designed to assist researchers and students in analysing and understanding various aspects of peptides, including their physical and chemical properties. With this tool, you can easily calculate molecular weight, predict hydrophobicity, and much more, making it a helpful tool for students and researchers to get insight about peptides.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin: 30px;">
+                  <a class="btn btn-outline-primary btn-lg" href="/peptool">Access PepAnalyzer</a>
+                  <a class="btn btn-outline-primary btn-lg" href="/blast_tool">Access Blast Tool</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Team-->
+          <div class="container px-4 py-5" id="team">
+            <h2 class="pb-2 border-bottom">Team</h2>
+            <div class="row justify-content-center" style="margin: 20px;">
+              <!--Indrakant-->
+              <div class="col-lg-4" style="display: flex; flex-direction: column; align-items: center;">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <defs>
+                    <clipPath id="clip-circle">
+                      <circle cx="70" cy="70" r="70"/>
+                    </clipPath>
+                  </defs>
+                  <image clip-path="url(#clip-circle)" width="100%" height="110%" xlink:href="{{url_for('static',filename= '../static/assets/images/indrakant.jpg')}}"/>
+                </svg>
+                <h3 class="fw-normal">Dr.Indrakant Kumar Singh</h3>
+                <center>
+                <p>Professor & Head (TIC), Department of Zoology <br>Head DBC i4 Centre <br>Deshbandhu College,University of Delhi <br> New Delhi-110019, India</p></center>
+                <p><a class="btn btn-primary" target="_blank" href="https://sites.google.com/db.du.ac.in/mbrlab">Know more &raquo;</a></p>
+              </div>
+            </div>
+            <div class="row justify-content-center" style="margin: 20px;">
+              <!--Vanshika-->
+              <div class="col-lg-4" style="display: flex; flex-direction: column; align-items: center;">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <defs>
+                    <clipPath id="clip-circle">
+                      <circle cx="70" cy="70" r="70"/>
+                    </clipPath>
+                  </defs>
+                  <image clip-path="url(#clip-circle)" width="100%" height="109%" xlink:href="{{url_for('static',filename= '../static/assets/images/vanshika.jpg')}}"/>
+                </svg>
+                <h3 class="fw-normal">Vanshika Rustagi</h3>
+                <center><p>PhD Scholar<br>Deshbandhu College,University of Delhi <br> New Delhi-110019, India</p></center>
+                <p><a class="btn btn-primary" target="_blank" href="https://www.linkedin.com/in/vanshika-rustagi-028781149/?originalSubdomain=in">Know more &raquo;</a></p>
+              </div>
+              <!--Monika-->
+              <div class="col-lg-4" style="display: flex; flex-direction: column; align-items: center;">
+                  <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <defs>
+                      <clipPath id="clip-circle">
+                        <circle cx="70" cy="70" r="70"/>
+                      </clipPath>
+                    </defs>
+                    <image clip-path="url(#clip-circle)" width="100%" height="125%" xlink:href="{{url_for('static',filename= '../static/assets/images/monika.jpeg')}}"/>
+                  </svg>
+                  <h3 class="fw-normal">Dr.Monika Bajaj</h3>
+                  <center><p>Assistant Professor Department of Computer Science<br>Deshbandhu College, University of Delhi, <br>Delhi-110007, India</p></center>
+                  <p><a class="btn btn-primary" target="_blank" href="https://www.deshbandhucollege.ac.in/uploads/Resume/ComputerSc/Monika%20Bajaj-cs.pdf">Know more &raquo;</a></p>
+              </div>
+              <!--Archana-->
+              <div class="col-lg-4" style="display: flex; flex-direction: column; align-items: center;">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <defs>
+                    <clipPath id="clip-circle">
+                      <circle cx="70" cy="70" r="70"/>
+                    </clipPath>
+                  </defs>
+                  <image clip-path="url(#clip-circle)" width="100%" height="100%" xlink:href="{{url_for('static',filename= '../static/assets/images/unknown.jpg')}}"/>
+                </svg>
+                <h3 class="fw-normal">Dr.Archana Singh</h3>
+                <center><p>Associate Professor Department of Botany<br>HansRaj College, University of Delhi, <br>Delhi-110007, India</p></center>
+                <p><a class="btn btn-primary" target="_blank" href="https://www.hansrajcollege.ac.in/academics/departments/science/botany/faculty-detail/7/">Know more &raquo;</a></p>
+              </div>
+            </div>
+            <div class="row justify-content-center" style="margin-left: 20px; margin-right: 20px; margin-top: 60px;;">
+              <h3 class="text-center">Technical Team</h3>
+              <div class="tech-team-container">
+                <div class="tech-team">
+                  <a target="_blank" href="https://www.deshbandhucollege.ac.in/uploads/Resume/ComputerSc/Monika%20Bajaj-cs.pdf"><h5 class="text-center">Dr.Monika Bajaj</h5></a>
+                  Assistant Professor Department of Computer Science <br> Deshbandhu College
+                </div>
+                <div class="tech-team text-center">
+                  <a target="_blank" href="https://www.linkedin.com/in/vanshika-rustagi-028781149/?originalSubdomain=in"><h5 class="text-center">Vanshika Rustagi</h5></a>
+                  PhD Scholar <br>Deshbandhu College
+                </div>
+                <div class="tech-team text-center">
+                  <a target="_blank" href="https://aswanthmanoj.github.io/"><h5 class="text-center">Aswanth C M</h5></a>
+                  BSc. Computer Sceince Student <br>Deshbandhu College
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <div class="visitor-container">
+          <div class="visitor-text">
+            <span class="user-count">{{userCount}}</span>
+            <span class="user-count-label text-muted"> users visited this webapp</span>
+          </div>
+        </div>
+
+        <!--
+        Footer
+        ==========================-->
+        <div class="container">
+          <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+              <li class="nav-item"><a href="/#" class="nav-link px-2 text-muted">Home</a></li>
+              <li class="nav-item"><a href="/peptool" class="nav-link px-2 text-muted">PepAnalyzer</a></li>
+              <li class="nav-item"><a href="/blast_tool" class="nav-link px-2 text-muted">Blast Tool</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Research paper</a></li>
+              <li class="nav-item"><a href="/documentation#faq" class="nav-link px-2 text-muted">FAQs</a></li>
+              <li class="nav-item"><a href="/documentation#document" class="nav-link px-2 text-muted">Documentation</a></li>
+            </ul>
+            <p class="text-center text-muted">&copy; PepAnalyzer tool version-1</p>
+          </footer>
+        </div>
+    </body>
+    <script src="{{url_for('static',filename= './assets/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static',filename= './js/index.js')}}"></script>
+    <script src="{{url_for('static',filename= './js/particle.js')}}"></script>
+</html>
