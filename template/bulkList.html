@@ -12,7 +12,83 @@
         <div class="wrapper">
             <h2 style="color:#ce7e00">Extracted Sequences</h2>
             <p class="text-muted">Sequences have been cleaned of invalid characters automatically.</p>
-            
+
+            <div class="mb-3">
+                <strong>Select features to compute:</strong>
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        <div class="mb-2"><strong>Physical / Chemical</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f1" type="checkbox" id="f1" {% if selected_features is none or 'f1' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f1">Peptide Size</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f2" type="checkbox" id="f2" {% if selected_features is none or 'f2' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f2">Molecular Weight</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f4" type="checkbox" id="f4" {% if selected_features is none or 'f4' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f4">Amino Acid Distribution</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f5" type="checkbox" id="f5" {% if selected_features is none or 'f5' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f5">Amino Acid Classification</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-2"><strong>Predictive Tools</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f6" type="checkbox" id="f6" {% if selected_features is none or 'f6' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f6">Peptide Charge</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f7" type="checkbox" id="f7" {% if selected_features is none or 'f7' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f7">Aromaticity</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f8" type="checkbox" id="f8" {% if selected_features is none or 'f8' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f8">Half Life / GRAVY</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f10" type="checkbox" id="f10" {% if selected_features is none or 'f10' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f10">Extinction Coefficient</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f11" type="checkbox" id="f11" {% if selected_features is none or 'f11' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f11">Disulfide Bridges</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f12" type="checkbox" id="f12" {% if selected_features is none or 'f12' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f12">Binding Potential</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f17" type="checkbox" id="f17" {% if selected_features is none or 'f17' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f17">Isoelectric Point</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-2"><strong>Graphical</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f13" type="checkbox" id="f13" {% if selected_features is none or 'f13' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f13">Hydropathy Plot</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f14" type="checkbox" id="f14" {% if selected_features is none or 'f14' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f14">Helical Wheel</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f15" type="checkbox" id="f15" {% if selected_features is none or 'f15' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f15">Amino Acid Distribution Plot</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input feature-checkbox" name="cal" value="f16" type="checkbox" id="f16" {% if selected_features is none or 'f16' in selected_features %}checked{% endif %}>
+                            <label class="form-check-label" for="f16">Amino Acid Classification Plot</label>
+                        </div>
+                    </div>
+                </div>
+                <small class="text-muted">Uncheck any feature you do not want computed.</small>
+            </div>
+
             <div class="table-content mt-4">
                 <table cellspacing="0">
                     <tr style="background-color: rgba(118, 118, 118, 0.841);">
@@ -25,11 +101,8 @@
                         <td>{{ loop.index }}</td>
                         <td style="font-family: monospace;">{{ seq }}</td>
                         <td>
-                            <form action="/calculate_result" method="post" style="display:inline;">
+                            <form action="/calculate_result" method="post" style="display:inline;" class="bulk-analyze-form" data-json-endpoint="/calculate_result_json">
                                 <input type="hidden" name="seq" value="{{ seq }}">
-                                {% for i in [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17] %}
-                                    <input type="hidden" name="cal" value="f{{ i }}">
-                                {% endfor %}
                                 <button type="submit" class="btn btn-outline-primary btn-sm">Analyze</button>
                             </form>
                         </td>
@@ -43,6 +116,204 @@
             </div>
         </div>
     </main>
+    <!-- Result modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="resultModalLabel">Analysis Result</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="downloadStatus" class="mb-2 text-muted" style="font-size: 0.9rem;">Preparing results...</div>
+            <pre id="resultContent" style="white-space: pre-wrap; word-wrap: break-word;">Loading...</pre>
+          </div>
+          <div class="modal-footer">
+            <a id="downloadLink" class="btn btn-primary" download="result.pdf" href="#">Download</a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{url_for('static',filename= './assets/dist/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static',filename= './js/particle.js')}}"></script>
+    <script>
+      function formatResultForDisplay(result) {
+        const lines = [];
+        if (!Array.isArray(result)) {
+          return JSON.stringify(result, null, 2);
+        }
+        for (const entry of result) {
+          if (entry && typeof entry === 'object') {
+            for (const [k, v] of Object.entries(entry)) {
+              lines.push(k + ':');
+              if (typeof v === 'string') {
+                lines.push('  ' + v);
+              } else if (Array.isArray(v)) {
+                v.forEach(item => lines.push('  - ' + item));
+              } else if (v && typeof v === 'object') {
+                for (const [subk, subv] of Object.entries(v)) {
+                  lines.push(`  - ${subk}: ${subv}`);
+                }
+              } else {
+                lines.push('  ' + String(v));
+              }
+            }
+            lines.push('');
+          } else {
+            lines.push(String(entry));
+          }
+        }
+        return lines.join('\n');
+      }
+
+      function createDownloadLink(text, filename) {
+        const link = document.getElementById('downloadLink');
+
+        // Prefer PDF if jsPDF is available.
+        // If jsPDF is missing, fall back to plain text so the file opens cleanly.
+        if (window.jspdf && window.jspdf.jsPDF) {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+          const margin = 15;
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const maxLineWidth = pageWidth - margin * 2;
+          const startY = 20;
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(12);
+          doc.text('PepAnalyzer results', margin, 12);
+          doc.setFontSize(10);
+
+          const lines = doc.splitTextToSize(text, maxLineWidth);
+          let cursorY = startY;
+
+          lines.forEach((line) => {
+            if (cursorY > doc.internal.pageSize.getHeight() - margin) {
+              doc.addPage();
+              cursorY = margin;
+            }
+            doc.text(line, margin, cursorY);
+            cursorY += 5;
+          });
+
+          // Trigger download directly via jsPDF for best compatibility.
+          doc.save(filename);
+
+          // Return null to indicate download already started.
+          return null;
+        }
+
+        // Fallback to plain text if PDF library isn't available
+        const textBlob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(textBlob);
+        link.href = url;
+        link.download = filename;
+        return url;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const modalElement = document.getElementById('resultModal');
+        const resultContent = document.getElementById('resultContent');
+        let currentDownloadUrl;
+
+        const bootstrapModal = new bootstrap.Modal(modalElement);
+        const downloadStatus = document.getElementById('downloadStatus');
+
+        modalElement.addEventListener('hidden.bs.modal', () => {
+          if (currentDownloadUrl) {
+            URL.revokeObjectURL(currentDownloadUrl);
+            currentDownloadUrl = null;
+          }
+        });
+
+        document.querySelectorAll('.bulk-analyze-form').forEach((form) => {
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const seq = formData.get('seq') || 'sequence';
+            const filename = `analysis_${seq.substring(0, 20).replace(/\s+/g, '_')}_${Date.now()}.pdf`;
+
+            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked')).map((el) => el.value);
+            if (selectedFeatures.length === 0) {
+              alert('Please select at least one feature to analyze.');
+              return;
+            }
+
+            const payload = {
+              seq,
+              cal: selectedFeatures,
+            };
+
+            try {
+              const resp = await fetch(form.dataset.jsonEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+              });
+
+              if (!resp.ok) {
+                throw new Error(`Server returned ${resp.status}`);
+              }
+
+              const json = await resp.json();
+              if (json && json.error) {
+                resultContent.textContent = `Error: ${json.error}`;
+                bootstrapModal.show();
+                return;
+              }
+
+              const text = formatResultForDisplay(json);
+              resultContent.textContent = text;
+
+              downloadStatus.textContent = 'PDF will be generated for download.';
+
+              if (currentDownloadUrl) {
+                URL.revokeObjectURL(currentDownloadUrl);
+              }
+
+              // Attach download handler to the button
+              document.getElementById('downloadLink').onclick = async (e) => {
+                e.preventDefault();
+                try {
+                  const pdfResp = await fetch('/generate_result_pdf', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                  });
+
+                  if (!pdfResp.ok) {
+                    throw new Error(`Server returned ${pdfResp.status}`);
+                  }
+
+                  const blob = await pdfResp.blob();
+                  const url = URL.createObjectURL(blob);
+                  currentDownloadUrl = url;
+
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = filename;
+                  document.body.appendChild(a);
+                  a.click();
+                  a.remove();
+                } catch (downloadErr) {
+                  console.error(downloadErr);
+                  downloadStatus.textContent = `Download failed: ${downloadErr.message}`;
+                }
+              };
+
+              bootstrapModal.show();
+            } catch (err) {
+              console.error(err);
+              resultContent.textContent = `An error occurred while generating results.\n${err && err.message ? err.message : err}`;
+              bootstrapModal.show();
+            }
+          });
+        });
+      });
+    </script>
 </body>
 </html>

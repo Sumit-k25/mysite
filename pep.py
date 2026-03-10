@@ -1,24 +1,59 @@
-from modlamp.descriptors import PeptideDescriptor, GlobalDescriptor
-from Bio.SeqUtils.IsoelectricPoint import IsoelectricPoint
-from Bio.SeqUtils.ProtParam import ProteinAnalysis
+_import_errors = []
+
+try:
+    from modlamp.descriptors import PeptideDescriptor, GlobalDescriptor
+    from modlamp.plot import helical_wheel
+    import modlamp.plot as pl
+except ImportError as e:
+    _import_errors.append(f"modlamp: {e}")
+
+try:
+    from Bio.SeqUtils.IsoelectricPoint import IsoelectricPoint
+    from Bio.SeqUtils.ProtParam import ProteinAnalysis
+    from Bio.SeqUtils import seq3
+    from Bio.Blast import NCBIXML, NCBIWWW
+    import Bio.SeqUtils.ProtParam
+    from Bio import SeqIO
+except ImportError as e:
+    _import_errors.append(f"biopython: {e}")
+
 from datetime import datetime, timezone, timedelta
-import os, base64, requests, mpld3, numpy as np
-from modlamp.plot import helical_wheel
-from Bio.Blast import NCBIXML
+import os, base64
+
+try:
+    import requests
+except ImportError as e:
+    _import_errors.append(f"requests: {e}")
+
+try:
+    import mpld3
+except ImportError as e:
+    _import_errors.append(f"mpld3: {e}")
+
+try:
+    import numpy as np
+except ImportError as e:
+    _import_errors.append(f"numpy: {e}")
+
 from datetime import datetime
-from Bio.SeqUtils import seq3
-from Bio.Blast import NCBIWWW
-import Bio.SeqUtils.ProtParam
-import modlamp.plot as pl
-from Bio import SeqIO
 import collections
 import random
 import auth
 import json
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker as ticker
+except ImportError as e:
+    _import_errors.append(f"matplotlib: {e}")
+
+# Ensure a consistent image output directory, using an absolute path.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_DIR = os.path.join(BASE_DIR, 'static', 'serve', 'images')
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR, exist_ok=True)
 
 
 
@@ -159,6 +194,14 @@ class PeptideOperations():
         self.flist={}
         self.glist={}
         self.seq=""
+        # If any dependencies were missing at import time, surface that as an error.
+        if _import_errors:
+            self._error = (
+                "Missing dependencies: " + "; ".join(_import_errors) + ". "
+                "Install required packages (e.g., pip install modlamp biopython)."
+            )
+        else:
+            self._error = None
 
 
     ############################################
@@ -453,7 +496,7 @@ class PeptideOperations():
             now=datetime.now()
             file_name = "hydropathy" + now.strftime("%m%d%y_%H_%M_%S") + "_" + str(random.randrange(0, 1000)) + ".png"
             #plt.gcf().set_size_inches(10, 5)
-            plt.savefig("mysite/static/serve/images/"+file_name, bbox_inches='tight')
+            plt.savefig(os.path.join(IMAGE_DIR, file_name), bbox_inches='tight')
             plt.clf()
 
 
@@ -476,7 +519,7 @@ class PeptideOperations():
 
         try:
             # Generate the helical wheel projection and save it as a PNG file
-            helical_wheel(self.seq, colorcoding='amphipathic', lineweights=True, filename="mysite/static/serve/images/"+file_name, seq=False, moment=True)
+            helical_wheel(self.seq, colorcoding='amphipathic', lineweights=True, filename=os.path.join(IMAGE_DIR, file_name), seq=False, moment=True)
 
 
             self.glist.update({"Helical Wheel Projection": file_name})
@@ -534,7 +577,7 @@ class PeptideOperations():
             # Generate a unique file name for the plot
             now=datetime.now()
             file_name = "Distribution_" + now.strftime("%m%d%y_%H_%M_%S") + "_" + str(random.randrange(0, 100000)) + ".png"
-            plt.savefig("mysite/static/serve/images/"+file_name, bbox_inches='tight')
+            plt.savefig(os.path.join(IMAGE_DIR, file_name), bbox_inches='tight')
             plt.clf()
 
             self.glist.update({"Distribution of Amino Acid": file_name})
@@ -563,7 +606,7 @@ class PeptideOperations():
             now = datetime.now()
             file_name = "classification_" + now.strftime("%m%d%y_%H_%M_%S") + "_" + str(random.randrange(0, 1000)) + ".png"
 
-            plt.savefig("mysite/static/serve/images/"+file_name, bbox_inches='tight')
+            plt.savefig(os.path.join(IMAGE_DIR, file_name), bbox_inches='tight')
             plt.clf()
 
             self.glist.update({"Amino Acid classification": file_name})
@@ -577,6 +620,10 @@ class PeptideOperations():
 
         self.seq = seq.upper()
         result = []
+
+        if self._error:
+            # Return an error object so client-side UI can show a clear message.
+            return [{"error": self._error}]
 
         for i in check_list:
             if i== 'f1':
